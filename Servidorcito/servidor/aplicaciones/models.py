@@ -8,10 +8,10 @@ REGION = [
         ("9", "IX Araucania"),
     ]
 CARGO = [
-        ("1", "Encargado ventas"),
-        ("2", "Administrador de usuarios"),
-        ("3", "Administrador de cuentas"),
-        ("4", "Encargado pagina web")
+        ("Encargado ventas", "Encargado ventas"),
+        ("Administrador de usuarios", "Administrador de usuarios"),
+        ("Administrador de cuentas", "Administrador de cuentas"),
+        ("Encargado pagina web", "Encargado pagina web")
     ]
 
 class Cliente(models.Model):
@@ -31,20 +31,31 @@ class Administrador(models.Model):
     correo=models.CharField(max_length=100)
     contra=models.CharField(max_length=12)
     telefono=models.IntegerField()
-    cargo=models.CharField(max_length=1,choices=CARGO)
+    cargo=models.CharField(max_length=100,choices=CARGO)
     
 class Vinilo(models.Model):
     id=models.AutoField(primary_key=True)
-    cara_delante = models.FileField(upload_to="files/%Y/%m/%d")
-    cara_detras = models.FileField(upload_to="files/%Y/%m/%d")
+    cara_delante = models.ImageField(upload_to="productos")
+    cara_detras = models.ImageField(upload_to="productos")
     nombre_cantante=models.CharField(max_length=40)
     nombre_vinilo=models.CharField(max_length=40)
     estilo=models.CharField(max_length=40) #Esto se podia dejar como un choise tambien
     precio=models.IntegerField()
-    cantidad=models.IntegerField()
+    
+    def __str__(self):
+        return f"{self.nombre_vinilo} de {self.nombre_cantante}"
 
 class Carrito(models.Model):
     id=models.AutoField(primary_key=True)
     user=models.CharField(max_length=10)
     producto=models.CharField(max_length=20)
     cantidad=models.IntegerField()
+    
+
+###################ESTO ES DE INGENERIA EN INFORMATICA############################
+
+class Presupuesto(models.Model):
+    id=models.AutoField(primary_key=True)
+    cliente=models.ForeignKey(Cliente,on_delete=models.PROTECT)
+    descripcion=models.CharField(max_length=500)
+    monto=models.IntegerField()
