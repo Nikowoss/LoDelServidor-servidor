@@ -12,4 +12,4 @@ class formModificarVinilo(forms.ModelForm):
     class Meta:
         model=Vinilo
         fields='__all__'
-        #["cara_delante","cara_detras", "nombre_cantante", "nombre_vinilo", "estilo","precio"]
+        
