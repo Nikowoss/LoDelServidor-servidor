@@ -32,8 +32,6 @@ class Administrador(models.Model):
     contra=models.CharField(max_length=12)
     telefono=models.IntegerField()
     cargo=models.CharField(max_length=1,choices=CARGO)
-
-
     
 class Vinilo(models.Model):
     id=models.AutoField(primary_key=True)
