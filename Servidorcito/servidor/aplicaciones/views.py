@@ -14,10 +14,10 @@ def index(request):
     return render(request,'aplicaciones/index.html',contexto)
 
 def otrawea(request):
-    admin=Administrador.objects.all()
+    v=Vinilo.objects.all()
     
     contexto={
-        "admins":admin,
+        "v":v,
     }
     
     return render(request,'aplicaciones/otrawea.html',contexto)
@@ -79,3 +79,4 @@ def modificarvinilo(request,id):
             return redirect(to="vinilos")
         
     return render(request,'aplicaciones/modificarvinilo.html',contexto)
+
